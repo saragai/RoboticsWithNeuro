@@ -1,8 +1,8 @@
-#RandomPlayer.py
+#PlayerRandom.py
 from PlayerBase import PlayerBase
 import numpy as np
 
-class RandomPlayer(PlayerBase):
+class PlayerRandom(PlayerBase):
 	def __init__(self):
 		PlayerBase.__init__(self)
 

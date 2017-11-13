@@ -6,7 +6,7 @@ class Game:
 	def __init__(self):
 		self.game_init()
 		self.playerList = []
-	
+		self.result = [0,0,0]
 	def set_player(self, pl1, pl2):
 		# call once
 		self.playerList.append(pl1)
@@ -21,12 +21,12 @@ class Game:
 		result = None
 		self.game_init()
 		while(self.flag):
+			if(display):
+				self.game_display()
 			x,y = self.game_input()
+			print("Player{}, ({},{})".format(self.turn,x,y))
 			self.game_update(x,y)
 			result = self.game_judge()
-			if(True):
-				print("Player{}, ({},{})".format(self.turn,x,y))
-				self.game_display()
 			self.turn = 1-self.turn
 		return result
 	
@@ -51,14 +51,12 @@ class Game:
 			s = max((self.board[r,:]==self.turn).sum(), (self.board[:,r]==self.turn).sum())
 			if s == Game.gamerange:
 				self.game_end(self.turn)
-				print("s: {}".format(s))######
 				return self.turn
 			diag1[r] = self.board[r,r]
 			diag2[r] = self.board[r,Game.gamerange - r -1]
 		diag = max((diag1 == self.turn).sum(), (diag2==self.turn).sum())
 		if diag == Game.gamerange:
 			self.game_end(self.turn)
-			print("diag: {}".format(diag))#####
 			return self.turn
 
 		return None
@@ -71,8 +69,10 @@ class Game:
 			self.playerList[0].result(None)
 			self.playerList[1].result(None)
 			self.flag = False
+			self.result[2] += 1
 			return
 		self.playerList[PlayerID].result(True)
 		self.playerList[1-PlayerID].result(False)
+		self.result[PlayerID] += 1
 		self.flag = False
 

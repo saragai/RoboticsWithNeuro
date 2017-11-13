@@ -1,11 +1,12 @@
 #main.py
 
 from Game import Game
-from RandomPlayer import RandomPlayer
+from PlayerRandom import PlayerRandom
+from PlayerHuman import PlayerHuman
 
 game = Game()
-pl1 = RandomPlayer()
-pl2 = RandomPlayer()
+pl1 = PlayerRandom()
+pl2 = PlayerHuman()
 
 game.set_player(pl1,pl2)
 
