@@ -1,17 +1,16 @@
 #NeuronInput.py
 from NeuronBase import NeuronBase
 class NeuronInput(NeuronBase):
-	def __init__(self,Network,n):
-		NeuronBase.__init__(self,Network)
+	def __init__(self,network,n):
+		NeuronBase.__init__(self,network)
 		self.n = n
 		
-	def init_child(self):
-		self.children.append(self.Network.nodeList[0]) 
+	def init_children(self):
+		self.children.append(self.network.nodeList3d.get(self.n % 2, self.n // 2, 0)) 
 	def fire(self):
-		self.input = 2
+		self.send()
 		NeuronBase.fire(self)
 	def post_fire(self):
-		self.output = 2
 		NeuronBase.post_fire(self)
 	def status(self):
 		pass
