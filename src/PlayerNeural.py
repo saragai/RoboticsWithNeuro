@@ -1,12 +1,12 @@
 #PlayerNeural.py
 
 from PlayerBase import PlayerBase
+from Network import Network
 
 class PlayerNeural(PlayerBase):
 	def __init__(self):
-		
-		pass
-	
+		self.Network = Network()
+		self.Network
 	def move(self, board):
 		
 		pass
