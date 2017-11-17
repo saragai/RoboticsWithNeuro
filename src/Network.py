@@ -45,6 +45,12 @@ class Network:
 		for node in self.nodeList:
 			node.post_fire()
 
+	def learn(self):
+		for node in self.inputNodeList:
+			node.learn()
+		for node in self.nodeList:
+			node.learn()
+
 	def status(self):
 		for node in self.nodeList:
 			node.status()

@@ -8,7 +8,8 @@ class NeuronBrain(NeuronBase):
 		self.x = x
 		self.y = y
 		self.z = z
-		self.threshold = 0.7
+		self.threshold = 0.5
+		self.init_weight = 0.3
 
 
 	def init_children(self):
@@ -23,13 +24,26 @@ class NeuronBrain(NeuronBase):
 				#print("({}) distance = {}".format(ni, distance[ni]))
 				rand -= distance[ni]
 				if(rand <= 0.):
-					self.children.append(self.network.nodeList[ni])
+					self.children.append([self.network.nodeList[ni], self.init_weight])
 					break
 	
+	def learn(self):
+		if self.input > self.threshold :
+			for child in self.children:
+				if child[0].fire_flag :
+					child[1] *= 1.1
+				else:
+					child[1] *= 0.99
+
 	def post_fire(self):
 		if self.input > self.threshold :
+			self.fire_flag = True
 			self.output = self.input
-			self.input = 0.0
+		else:
+			self.fire_flag = False
+		self.input = 0.0
+		
+
 
 	def status(self):
 		print("""\
