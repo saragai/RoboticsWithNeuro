@@ -8,8 +8,8 @@ class NeuronBrain(NeuronBase):
 		self.x = x
 		self.y = y
 		self.z = z
-		self.threshold = 0.5
-		self.init_weight = 0.3
+		self.threshold = 0.01
+		self.init_weight = 1.0
 
 
 	def init_children(self):
@@ -38,7 +38,7 @@ class NeuronBrain(NeuronBase):
 	def post_fire(self):
 		if self.input > self.threshold :
 			self.fire_flag = True
-			self.output = self.input
+			self.output = self.init_weight/(1.0+np.exp(-self.input))
 		else:
 			self.fire_flag = False
 		self.input = 0.0

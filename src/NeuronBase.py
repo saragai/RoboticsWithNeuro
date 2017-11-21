@@ -12,7 +12,8 @@ class NeuronBase:
 		self.send()
 		if(self.output>0):
 			for child in self.children:
-				print("{} -> {} val:{} chi:{}".format(self, child[0], self.output, child[0].input))
+				#print("{} -> {} val:{} chi:{}".format(self, child[0], self.output, child[0].input))
+				pass
 
 	def post_fire(self):
 		self.output = self.input

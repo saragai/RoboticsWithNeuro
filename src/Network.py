@@ -2,6 +2,7 @@
 import numpy as np
 from NeuronBrain import NeuronBrain as Neuron
 from NeuronInput import NeuronInput
+from NeuronOutput import NeuronOutput
 from ThreeDimentionalListAccessor import ThreeDimentionalListAccessor
 
 class Network:
@@ -21,10 +22,16 @@ class Network:
 		self.inputNodeList = []
 		self.init_input(innum)
 		
-		
+		self.outputNodeList = []
+		self.init_output(outnum)
+
 	def init_input(self, num):
 		for i in range(num):
 			self.inputNodeList.append(NeuronInput(self, i))
+
+	def init_output(self, num):
+		for i in range(num):
+			self.outputNodeList.append(NeuronOutput(self,i))
 
 
 	def init_children(self):
@@ -38,11 +45,15 @@ class Network:
 			node.fire()
 		for node in self.nodeList:
 			node.fire()
+		for node in self.outputNodeList:
+			node.fire()
 
 	def post_fire(self):
 		for node in self.inputNodeList:
 			node.post_fire()
 		for node in self.nodeList:
+			node.post_fire()
+		for node in self.outputNodeList:
 			node.post_fire()
 
 	def learn(self):

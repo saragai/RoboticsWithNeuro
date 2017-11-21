@@ -11,8 +11,6 @@ class NeuronInput(NeuronBase):
 		NeuronBase.fire(self)
 	def post_fire(self):
 		NeuronBase.post_fire(self)
-	def status(self):
-		pass
 	
 	def status(self):
 		print("""\
