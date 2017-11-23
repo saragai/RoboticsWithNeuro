@@ -2,34 +2,36 @@
 import numpy as np
 from NeuronBrain import NeuronBrain as Neuron
 from NeuronInput import NeuronInput
+from NeuronOutput import NeuronOutput
 from ThreeDimentionalListAccessor import ThreeDimentionalListAccessor
 
 class Network:
-	def __init__(self, X, Y, Z, innum, outnum):
+	def __init__(self, X, Y, Z):
 		self.X = X
 		self.Y = Y
 		self.Z = Z
-		self.innum = innum
-		
+		self.size = X * Y * Z
 		self.nodeList = []
+		self.inputNodeList = []
+		self.outputNodeList = []
+
 		for x in range(X):
 			for y in range(Y):
 				for z in range(Z):
-					self.nodeList.append(Neuron(self,x,y,z))
-		self.nodeList3d = ThreeDimentionalListAccessor(self.nodeList,X,Y,Z)
-		
-		self.inputNodeList = []
-		self.init_input(innum)
-		
-		
+					self.nodeList.append(Neuron(self, x, y, z))
+		self.nodeList3d = ThreeDimentionalListAccessor(self.nodeList, X, Y, Z)
+		self.init_children()
+
 	def init_input(self, num):
 		for i in range(num):
 			self.inputNodeList.append(NeuronInput(self, i))
 
+	def init_output(self, num):
+		for i in range(num):
+			self.outputNodeList.append(NeuronOutput(self, i))
+
 
 	def init_children(self):
-		for node in self.inputNodeList:
-			node.init_children()
 		for node in self.nodeList:
 			node.init_children()
 
@@ -38,11 +40,15 @@ class Network:
 			node.fire()
 		for node in self.nodeList:
 			node.fire()
+		for node in self.outputNodeList:
+			node.fire()
 
 	def post_fire(self):
 		for node in self.inputNodeList:
 			node.post_fire()
 		for node in self.nodeList:
+			node.post_fire()
+		for node in self.outputNodeList:
 			node.post_fire()
 
 	def learn(self):
@@ -52,9 +58,11 @@ class Network:
 			node.learn()
 
 	def status(self):
+		for node in self.inputNodeList:
+			node.status()
 		for node in self.nodeList:
 			node.status()
-		for node in self.inputNodeList:
+		for node in self.outputNodeList:
 			node.status()
 
 if __name__ == '__main__':

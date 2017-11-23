@@ -10,9 +10,6 @@ class NeuronBase:
 
 	def fire(self):
 		self.send()
-		if(self.output>0):
-			for child in self.children:
-				print("{} -> {} val:{} chi:{}".format(self, child[0], self.output, child[0].input))
 
 	def post_fire(self):
 		self.output = self.input
@@ -31,8 +28,12 @@ class NeuronBase:
 	def send(self):
 		for child in self.children:
 			child[0].receive(self.output*child[1])
-	
 
 	def status(self):
-		pass
-
+		print("""\
+--Base
+Children	= {}
+input		= {}
+output		= {}
+fire_flag	= {}\
+""".format(self.children, self.input, self.output, self.fire_flag))
