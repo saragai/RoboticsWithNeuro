@@ -5,14 +5,15 @@ class NeuronOutput(NeuronBase):
 		NeuronBase.__init__(self,network)
 		self.n = n
 		self.parents = []
-		self.threshold = 2.0
-		self.init_parent()
+		self.threshold = 1.0
 
-	def init_parent(self):
-		self.parents = [self.network.nodeList3d.get( self.n, 0, 4 ), self.network.nodeList3d.get( self.n, 1, 4 )] 
+	def set_parent(self, x, y, z):
+		self.parents.append(self.network.nodeList3d.get(x, y, z)) 
+
 	def fire(self):
 		for parent in self.parents:
 			self.input += parent.output
+
 	def post_fire(self):
 		if self.threshold < self.input:
 			self.output = self.input
@@ -21,12 +22,13 @@ class NeuronOutput(NeuronBase):
 		self.input = 0.0
 
 	def status(self):
-		print("""\
+		print("""
 InputNode({})
 Parents		= {}
 input		= {}
-output		= {}
-\n""".format(self.n, self.parents, self.input, self.output ))
+output		= {}\
+""".format(self.n, self.parents, self.input, self.output ))
+		NeuronBase.status(self)
 
 	def __repr__(self):
 		s = "input({})".format(self.n)
