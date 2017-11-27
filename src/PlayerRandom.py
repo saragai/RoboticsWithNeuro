@@ -8,7 +8,7 @@ class PlayerRandom(PlayerBase):
 
 	def move(self, board):
 		gamerange = board.shape[0]
-		empty = (board == -1)
+		empty = (board == 2)
 		xarg = list(range(gamerange))
 		yarg = list(range(gamerange))
 		np.random.shuffle(xarg)
