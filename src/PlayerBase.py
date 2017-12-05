@@ -5,6 +5,7 @@ class PlayerBase:
         self.winnum = 0
         self.evennum = 0
         self.losenum = 0
+        self.suicide = 0
         pass
 
     def move(self, board):

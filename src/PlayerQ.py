@@ -13,7 +13,6 @@ class PlayerQ(PlayerBase):
         self.oldBoard = np.zeros([gamerange, gamerange])
         self.oldAction = None
         
-        self.selfkill = 0
         
     def scalar_board_action(self, board, action):
         board.shape = [board.size]
@@ -41,7 +40,7 @@ class PlayerQ(PlayerBase):
         else:
             arg = self.argmax_action(board)
             if board[self.actions[arg][0], self.actions[arg][1]] != 2:
-                self.selfkill += 1
+                self.suicide += 1
             """
             while(True):
                 arg = self.argmax_action(board)
