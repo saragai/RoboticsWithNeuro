@@ -1,5 +1,5 @@
 # PlayerQ.py
-from PlayerBase import PlayerBase
+import PlayerBase
 import numpy as np
 class PlayerQ(PlayerBase):
     def __init__(self, gamerange, gamma=.9, alpha=.1, epsilon=.1):

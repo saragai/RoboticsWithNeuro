@@ -1,15 +1,15 @@
 #main.py
 import numpy as np
-from Game import Game
-from PlayerRandom import PlayerRandom
-from PlayerHuman import PlayerHuman
-from PlayerQ import PlayerQ
+from Game.Game import Game
+from Game import PlayerRandom
+from Game import PlayerHuman
+from Game import PlayerQ
 
 game = Game()
 pl0 = PlayerRandom()
-pl1 = PlayerRandom()
+#pl1 = PlayerRandom()
 #pl0 = PlayerQ(Game.gamerange, gamma=.9, alpha=.1, epsilon=.05)
-#pl1 = PlayerQ(Game.gamerange, gamma=.9, alpha=.1, epsilon=.05)
+pl1 = PlayerQ(Game.gamerange, gamma=.9, alpha=.1, epsilon=.05)
 #pl1 = PlayerHuman()
 
 game.set_player(pl1,pl0)
