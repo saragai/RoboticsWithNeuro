@@ -2,6 +2,7 @@
 print (__package__)
 from . import PlayerBase
 import numpy as np
+PlayerBase = PlayerBase.PlayerBase
 
 class PlayerRandom(PlayerBase):
 	def __init__(self):

@@ -1,6 +1,7 @@
 #PlayerHuman.py
 import numpy as np
-import PlayerBase
+from . import PlayerBase
+PlayerBase = PlayerBase.PlayerBase
 
 class PlayerHuman(PlayerBase):
 	def __init__(self):

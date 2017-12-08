@@ -1,20 +1,23 @@
 #main.py
 import numpy as np
-from Game.Game import Game
-from Game import PlayerRandom
-from Game import PlayerHuman
-from Game import PlayerQ
+import Game.Game
+import Game.PlayerRandom as PlayerRandom
+import Game.PlayerHuman as PlayerHuman
+import Game.PlayerQ as PlayerQ
 
-game = Game()
+PlayerRandom = PlayerRandom.PlayerRandom
+PlayerHuman = PlayerHuman.PlayerHuman
+PlayerQ = PlayerQ.PlayerQ
+Game = Game.Game
+game = Game.Game()
 pl0 = PlayerRandom()
-#pl1 = PlayerRandom()
 #pl0 = PlayerQ(Game.gamerange, gamma=.9, alpha=.1, epsilon=.05)
-pl1 = PlayerQ(Game.gamerange, gamma=.9, alpha=.1, epsilon=.05)
-#pl1 = PlayerHuman()
+pl1 = PlayerQ(game.gamerange, gamma=.9, alpha=.1, epsilon=.05)
+pl2 = PlayerHuman()
 
 game.set_player(pl1,pl0)
 
-for i in range(10000):
+for i in range(1000):
     game.game_main()
     if i%1000 == 0:
         
