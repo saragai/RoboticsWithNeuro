@@ -1,6 +1,8 @@
 #PlayerRandom.py
-from PlayerBase import PlayerBase
+print (__package__)
+from . import PlayerBase
 import numpy as np
+PlayerBase = PlayerBase.PlayerBase
 
 class PlayerRandom(PlayerBase):
 	def __init__(self):
@@ -20,3 +22,6 @@ class PlayerRandom(PlayerBase):
 		print("Error, random move")
 		return None
 
+if __name__ == "__main__":
+    player = PlayerBase
+    

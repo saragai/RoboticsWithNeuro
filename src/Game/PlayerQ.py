@@ -1,6 +1,8 @@
 # PlayerQ.py
-from PlayerBase import PlayerBase
+from . import PlayerBase
 import numpy as np
+PlayerBase = PlayerBase.PlayerBase
+
 class PlayerQ(PlayerBase):
     def __init__(self, gamerange, gamma=.9, alpha=.1, epsilon=.1):
         PlayerBase.__init__(self)

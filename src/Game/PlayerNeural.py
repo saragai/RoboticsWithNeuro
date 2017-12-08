@@ -1,7 +1,10 @@
 #PlayerNeural.py
 
-from PlayerBase import PlayerBase
-from Network import Network
+from . import PlayerBase
+import EchoStateNetwork.Network
+
+PlayerBase = PlayerBase.PlayerBase
+Network = EchoStateNetwork.Network.Network
 
 class PlayerNeural(PlayerBase):
 	def __init__(self):
