@@ -7,6 +7,7 @@ class Game:
     def __init__(self):
         self.game_init()
         self.playerList = []
+        self.evenFlag = False
         
     def set_player(self, pl1, pl2):
         # call once
@@ -17,6 +18,7 @@ class Game:
         self.board = 2 * np.ones([Game.gamerange,Game.gamerange])
         self.turn = 0
         self.flag = True
+        self.evenFlag = False
     
     def game_change_order(self):
         self.playerList[0], self.playerList[1] = self.playerList[1], self.playerList[0]
@@ -65,13 +67,17 @@ class Game:
         if diag == Game.gamerange:
             reward = self.game_end(self.turn)
             return reward
-
-        return -0.05
+        return 0
 
     def game_display(self):
         print(self.board)
     
     def game_reward(self, reward):
+        if(self.evenFlag):
+            self.playerList[self.turn].reward(self.board, reward)
+            self.playerList[1-self.turn].reward(self.board, reward)
+            return
+
         self.playerList[self.turn].reward(self.board, reward)
         self.playerList[1-self.turn].reward(self.board, -reward)
     
@@ -80,7 +86,8 @@ class Game:
             self.playerList[0].result(None)
             self.playerList[1].result(None)
             self.flag = False
-            return 0
+            self.evenFlag = True
+            return 1
         self.playerList[PlayerID].result(True)
         self.playerList[1-PlayerID].result(False)
         self.flag = False
